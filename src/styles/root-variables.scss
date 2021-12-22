@@ -1,0 +1,36 @@
+@import './variables';
+
+:root {
+  --light: #fff;
+  --dark: #242424;
+  --blue: #{$color-blue};
+  --blue-lighten: #27316b;
+  --light-inversed: #f3f3f3;
+  --dark-inversed: #484848;
+  --accent: #3b7ffc;
+  --accent-lighten: #61abff;
+  --theme-color-text: var(--dark);
+  --theme-color-bg: var(--light);
+
+  --theme-color-bg-inversed: #afafaf;
+  --theme-accent: var(--accent);
+  --theme-blue: var(--accent);
+  --theme-blue-lighten: var(--accent-lighten);
+
+  --theme-bg-transparent: rgba(31, 20, 54, .9);
+  // --theme: 
+  // asdasdasd
+  --theme-body-bg: #140c28;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --theme-color-text: var(--light);
+    --theme-color-bg: var(--dark);
+
+    --theme-color-bg-inversed: var(--light-inversed);
+    --theme-accent: var(--accent-lighten);
+    --theme-blue: var(--blue);
+    --theme-blue-lighten: var(--blue-lighten);
+  }
+}
