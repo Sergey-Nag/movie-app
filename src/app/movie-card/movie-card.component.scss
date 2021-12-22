@@ -1,0 +1,64 @@
+@import '/src/styles/shared', '/src/styles/variables';
+
+:host {
+  @extend %movie-card, %transition;
+  margin-right: $movie-card-margin-right;
+}
+
+.cover {
+  @extend %border, %transition;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.02);
+    z-index: 3;
+    box-shadow: 0 5px 30px 5px rgba(0, 0, 0, .5);
+  }
+}
+
+.title {
+  &-row {
+    @extend %d-flex;
+    color: var(--theme-color-text);
+    align-items: baseline;
+  }
+  &-wrapp {
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: $movie-card-title-max-width;
+    text-overflow: ellipsis;
+  }
+
+  display: inline;
+  font-size: 1.4em;
+  line-height: 1.9em;
+  font-weight: 500;
+}
+
+.duration {
+  @extend %d-flex;
+  align-items: center;
+  color: var(--theme-color-text);
+  opacity: .5;
+}
+
+.time {
+  margin-left: 5px;
+  font-size: 1.04em;
+}
+
+.badge {
+  border: 1px solid var(--theme-color-text);
+  color: var(--theme-color-text);
+  font-weight: 400;
+  border-radius: .5em;
+  padding: .2em .9em .15em;
+  font-size: 1.1em;
+  margin-left: .5em;
+  opacity: .5;
+}

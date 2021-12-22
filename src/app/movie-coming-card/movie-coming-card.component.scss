@@ -1,0 +1,40 @@
+@import '/src/styles/shared', '/src/styles/variables', '/src/app/movie-card/movie-card.component.scss';
+
+:host {
+  @extend %movie-card, %transition;
+  margin-right: $movie-card-margin-right;
+  flex: 1 1 $coming-movie-card-width;
+  min-width: $coming-movie-card-width;
+}
+
+.cover {
+  @extend .cover;
+  
+}
+
+.title {
+  @extend .title;
+  &-wrapp {
+    max-width: $coming-movie-card-title-max-width;
+  }
+}  
+
+.duration {
+  @extend .duration;
+}
+
+.time {
+  @extend .time;
+}
+
+.badge {
+  @extend .badge;
+}
+
+.date {
+  flex: 1;
+  text-align: right;
+  font-size: 1.3em;
+  color: goldenrod;
+  font-weight: 500;
+}

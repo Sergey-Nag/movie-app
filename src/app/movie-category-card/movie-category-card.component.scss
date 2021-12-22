@@ -1,0 +1,32 @@
+@import '/src/styles/variables', '/src/styles/shared';
+
+:host {
+  @extend %transition, %snap-item;
+  display: block;
+  position: relative;
+  margin-right: $movie-card-margin-right;
+	flex: 1 0 $category-card-width;
+  max-width: $category-card-width;
+  height: $category-card-height;
+}
+
+.cover {
+  @extend %d-flex, %flex-content-center, %border, %transition;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.02);
+    box-shadow: 0 5px 30px 5px rgba(0, 0, 0, .5);
+  }
+}
+
+.title {
+  color: var(--theme-color-text);
+  font-size: 1.6em;
+  font-weight: 500;
+}

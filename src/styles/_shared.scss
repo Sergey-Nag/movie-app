@@ -1,0 +1,119 @@
+@import './variables';
+
+%d-grid {
+  display: grid;
+  align-items: stretch;
+}
+
+%d-flex {
+  display: flex;
+}
+
+%flex-content-center {
+  justify-content: center;
+  align-items: center;
+}
+
+%flex-col {
+  flex-direction: column;
+}
+
+%container {
+  margin: 0 auto;
+  width: 1500px;
+
+  @media screen and (max-width: 1510px) {
+    max-width: 1024px;
+  }
+  @media screen and (max-width: 1028px) {
+    max-width: 800px;
+  }
+
+  &.full {
+    height: 1px;
+    min-height: 100vh;
+  }
+}
+
+%border {
+  border: none;
+  border-radius: $bttn-radius;
+}
+
+%transition {
+  transition: all $transition-time $transition-func;
+}
+
+%theme-defaults {
+  background-color: var(--theme-color-bg);
+  color: var(--theme-color-text);
+}
+
+%snap-item {
+  scroll-snap-align: start;
+  
+  &:first-child {
+    scroll-snap-align: center;
+  }
+}
+
+%movie-card {
+  @extend %d-grid, %snap-item;
+	flex: 1 0 $movie-card-width;
+  max-width: $movie-card-width;
+  grid-template-rows: 1fr 25px 25px;
+  gap: 10px;
+  height: $movie-card-height;
+}
+
+%scroll {
+  &::-webkit-scrollbar {
+    height: $scroll-size;
+    width: $scroll-size;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    opacity: 0;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: transparentize($scroll-color, .8); 
+      border-radius: 1em;
+      opacity: .2;
+    }
+  }
+}
+
+%scroll-visible { 
+  &::-webkit-scrollbar-thumb {
+    background-color: transparentize($scroll-color, .8); 
+    border-radius: 1em;
+    opacity: .2;
+  }
+}
+
+%content-view {
+  @extend %scroll, %scroll-visible;
+  padding-top: $content-view-padding-top;
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow-y: auto;
+  grid-area: content;
+
+  &:before {
+    content: '';
+    display: block;
+    position: fixed;
+    height: $content-view-padding-top;
+    margin-top: -$content-view-padding-top;
+    width: 100%;
+    z-index: 10;
+    background: linear-gradient(to bottom, var(--theme-body-bg) 10%, transparent 100%);
+  }
+}

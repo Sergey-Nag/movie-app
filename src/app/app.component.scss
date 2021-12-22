@@ -1,0 +1,30 @@
+@import '/src/styles/shared', '/src/styles/variables';
+
+:host {
+  @extend %d-grid;
+  grid-template-rows: $header-height 1fr;
+  grid-template-columns: $app-sidenav-width 1fr;
+  grid-template-areas: 
+    "header header"
+    "nav content";
+  column-gap: $body-sides-gap;
+
+  height: 100vh;
+  padding: {
+    top: $body-padding;
+    left: $body-padding;
+    bottom: 0;
+    right: 0;
+  }
+  & > app-header {
+    grid-area: header;
+  }
+
+  & > app-nav {
+    grid-area: nav;
+  }
+
+  .view {
+    display: none;
+  }
+}

@@ -1,0 +1,84 @@
+$base-padding: 1em;
+$body-padding: $base-padding * 3;
+$white: #fff;
+$dark: #242424;
+
+$color-blue: #1f1436;
+
+// colors
+:root {
+  --light: #fff;
+  --dark: #242424;
+  --blue: #1f1436;
+  --blue-lighten: #27316b;
+  --light-inversed: #f3f3f3;
+  --dark-inversed: #484848;
+  --accent: #3b7ffc;
+  --accent-lighten: #61abff;
+  --theme-color-text: var(--dark);
+  --theme-color-bg: var(--light);
+
+  --theme-color-text-inversed: #808080;
+  --theme-color-bg-inversed: #afafaf;
+  --theme-accent: var(--accent);
+  --theme-blue: var(--accent);
+  --theme-blue-lighten: var(--accent-lighten);
+
+  --theme-bg-transparent: rgba(31, 20, 54, .9);
+  --theme-btn-transparent-hover: rgba(72, 89, 185, 0.5);
+  --theme-btn-transparent-color: rgba(255, 255, 255, 0.5);
+  // --theme: 
+  // asdasdasd
+  --theme-body-bg: #140c28;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --theme-color-text: var(--light);
+    --theme-color-bg: var(--dark);
+
+    --theme-color-bg-inversed: var(--light-inversed);
+    --theme-color-text-inversed: var(--dark-inversed);
+    --theme-accent: var(--accent-lighten);
+    --theme-blue: var(--blue);
+    --theme-blue-lighten: var(--blue-lighten);
+  }
+}
+
+$header-avatar-width: 45px;
+$header-height: $body-padding + 2;
+
+$transition-time: .2s;
+$transition-func: ease-out;
+
+$base-radius: 1em;
+
+$bttn-radius: $base-radius;
+$bttn-padding: 1.2em;
+
+$icon-size: 25px;
+
+$app-sidenav-width: 90px;
+$body-sides-gap: $base-padding * 5;
+
+$content-view-padding-top: $body-sides-gap;
+
+$row-wrapp-height: 55vh;
+$row-margin-bottom: $content-view-padding-top;
+$row-left-gap: .5em;
+
+$movie-card-height: 500px;
+$movie-card-width: 250px;
+$movie-card-margin-right: $base-padding * 2;
+$movie-card-title-max-width: $movie-card-width - 40;
+
+$category-card-height: 150px;
+$category-card-width: $movie-card-width + 40;
+
+$coming-movie-card-width: $category-card-width + 40;
+$coming-movie-card-title-max-width: $coming-movie-card-width - 130;
+
+$scroll-size: .5em;
+$scroll-color: white;
+// $scroll-color: #192046;
+
