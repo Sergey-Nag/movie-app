@@ -1,19 +1,12 @@
 <h2 class="title">{{title}}</h2>
-<div *ngIf="isLoading; else content" class="wrapper">
+<div class="wrapper" @cardShow>
   <div class="inner">
-    <app-movie-card-placeholder *ngFor="let i of numberOfFitElements | repeat"></app-movie-card-placeholder>
+    <ng-content></ng-content>
+    <div class="more" *ngIf="showMoreButtonLink; else lastGap">
+      <ui-btn>Show more</ui-btn>
+    </div>
+    <ng-template #lastGap>
+      <div class="last-gap"></div>
+    </ng-template>
   </div>
 </div>
-<ng-template #content>
-  <div class="wrapper" @cardShow>
-    <div class="inner">
-      <ng-content></ng-content>
-      <div class="more" *ngIf="showMoreButtonLink; else lastGap">
-        <ui-btn>Show more</ui-btn>
-      </div>
-      <ng-template #lastGap>
-        <div class="last-gap"></div>
-      </ng-template>
-    </div>
-  </div>
-</ng-template>

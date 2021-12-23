@@ -17,9 +17,10 @@ $bttn-padding: 1.2em;
 $icon-size: 25px;
 
 $app-sidenav-width: 90px;
-$body-sides-gap: $base-padding * 5;
+$body-columns-gap: $base-padding * 5;
+$body-rows-gap: $base-padding * 4;
 
-$content-view-padding-top: $body-sides-gap;
+$content-view-padding-top: $body-rows-gap;
 
 $row-margin-bottom: $content-view-padding-top;
 $row-left-gap: .5em;

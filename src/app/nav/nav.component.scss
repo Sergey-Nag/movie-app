@@ -1,7 +1,7 @@
 @import '/src/styles/variables', '/src/styles/shared';
 
 :host {
-  padding: $body-sides-gap 0;
+  padding: $body-rows-gap 0 $body-columns-gap;
 }
 
 .nav {

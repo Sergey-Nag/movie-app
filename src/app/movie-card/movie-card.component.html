@@ -1,14 +1,22 @@
-<img [src]="movie.coverUrl" class="cover" [alt]="movie.title">
-<div class="title-row">
-  <div class="title-wrapp">
-    <h3 class="title">{{movie.title}}</h3>
+<ng-container *ngIf="isPreview; else cardContent">
+  <div class="preview cover"></div>
+  <h3 class="preview title"></h3>
+  <span class="preview duration"></span>
+</ng-container>
+
+<ng-template #cardContent>
+  <img [src]="coverUrl" class="cover" [alt]="movie.title">
+  <div class="title-row">
+    <div class="title-wrapp">
+      <h3 class="title">{{movie.title}}</h3>
+    </div>
+    <span class="badge">{{movie.pg | uppercase }}</span>
   </div>
-  <span class="badge">{{movie.pg | uppercase }}</span>
-</div>
-<div class="duration">
-  <svg-icon src="assets/icons/Clock_18x18.svg" class="ui-icon white"></svg-icon>
-  <span class="time">
-    {{movie.duration}}
-    minute
-  </span>
-</div>
+  <div class="duration">
+    <svg-icon src="assets/icons/Clock_18x18.svg" class="ui-icon white"></svg-icon>
+    <span class="time">
+      {{movie.duration}}
+      minute
+    </span>
+  </div>
+</ng-template>

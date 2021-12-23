@@ -1,8 +1,9 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, ChangeDetectionStrategy, Input, AfterViewInit, ElementRef, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, AfterViewInit, ElementRef, OnDestroy, ChangeDetectorRef, ContentChild, TemplateRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { ResizeInfo, ResizeService } from '../shared/services/resize.service';
+import { CardBase } from '../shared/theme/Card.base';
 
 @Component({
   selector: 'app-row-wrapp',
@@ -32,7 +33,6 @@ import { ResizeInfo, ResizeService } from '../shared/services/resize.service';
 })
 export class RowWrappComponent implements AfterViewInit, OnDestroy {
   @Input() title: string;
-  @Input() isLoading = true;
   @Input() showMoreButtonLink: string;
 
   resizeSubsribtion$: Subscription;
@@ -57,11 +57,6 @@ export class RowWrappComponent implements AfterViewInit, OnDestroy {
         this.elementRef.nativeElement.offsetWidth
       )
     );
-
-    setTimeout(() => {
-      this.isLoading = false;
-      this.cdRef.detectChanges();
-    }, 1500);
   }
 
   private countElements(width: number): number {
