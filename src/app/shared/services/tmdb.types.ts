@@ -19,6 +19,11 @@ export type TMDBConfig = {
   change_keys: string[]
 }
 
+export type GenreResponse = {
+  id: number,
+  name: string
+}
+
 export enum TMDBPosterSize {
   w92,
   w154,

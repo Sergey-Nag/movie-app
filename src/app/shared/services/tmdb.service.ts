@@ -3,8 +3,9 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { MovieData } from "src/app/movie-card/movie.type";
+import { MovieComingData } from "src/app/movie-coming-card/movie-coming.interface";
 import { environment } from "src/environments/environment";
-import { TMDBConfig, TMDBPosterSize } from "./tmdb.types";
+import { GenreResponse, TMDBConfig, TMDBPosterSize } from "./tmdb.types";
 
 
 @Injectable({
@@ -26,11 +27,11 @@ export class TMDBService {
   }
 
   getPopular(): Observable<any> {    
-    return this.get('/discover/movie')
+    return this.get('/movie/popular')
       .pipe(map((data: any) => {
         return {
           ...data,
-          results: this.formatResults(data.results)
+          results: this.formatResultsToMovieData(data.results)
         }
       }))
   }
@@ -44,13 +45,32 @@ export class TMDBService {
     )
   }
 
-  private formatResults(results: any[]): MovieData[] {
+  getGenres(): Observable<GenreResponse[]> {
+    return this.get('/genre/movie/list');
+  }
+
+  getUpcoming(): Observable<GenreResponse[]> {
+    return this.get('/movie/upcoming')
+      .pipe(map((data: any) => ({
+        ...data,
+        results: this.formatResultsToComingMovieData(data.results)
+      })));
+  }
+
+  private formatResultsToMovieData(results: any[]): MovieData[] {
     return results.map(({original_title, poster_path, vote_average, adult}: any) => ({
       title: original_title,
       coverUrl: poster_path,
       duration: vote_average,
       pg: adult ? '18+' : 'p',
-    })).splice(0, 10);
+    }));
+  }
+
+  private formatResultsToComingMovieData(results: any[]): MovieComingData[] {
+    return this.formatResultsToMovieData(results).map((el, i) => ({
+      ...el,
+      comingDate: results[i].release_date
+    }))
   }
 
   private get(path: string): Observable<any> {

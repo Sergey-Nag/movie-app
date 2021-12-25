@@ -59,8 +59,6 @@ export class RowWrappComponent implements AfterViewInit, AfterViewChecked, OnDes
   resizeSubsribtion$: Subscription;
   numberOfFitElements = 0;
 
-  @ContentChildren(MovieCardComponent) childrens: any;
-
   constructor(
     private resize: ResizeService,
     private cdRef: ChangeDetectorRef,

@@ -34,6 +34,13 @@ $bg-gradient: linear-gradient(90deg, $bg-lighten 15%, $bg-darken 45%, $bg-lighte
   background-image: $bg-gradient;
   background-size: 800% 800%;
   animation: loadingBg $bg-duration ease-in infinite;
+
+  &:nth-child(2) {
+    width: 90%;
+  }
+  &:nth-child(3) {
+    width: 40%;
+  }
 }
 
 @keyframes loadingBg {

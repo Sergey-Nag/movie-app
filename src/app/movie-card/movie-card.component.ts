@@ -14,6 +14,8 @@ export class MovieCardComponent extends CardBaseComponent implements OnInit {
   @Input() movie: MovieData = null;
 
   get coverUrl() {
+    if (!this.movie || !this.tmdb.config) return '';
+
     const { secure_base_url, poster_sizes } = this.tmdb.config.images;
     
     return `${secure_base_url}${poster_sizes[TMDBPosterSize.w342]}${this.movie.coverUrl}`;
