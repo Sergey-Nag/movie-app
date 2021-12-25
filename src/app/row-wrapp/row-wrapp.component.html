@@ -1,12 +1,21 @@
 <h2 class="title">{{title}}</h2>
-<div class="wrapper">
-  <div class="inner">
-    <ng-content></ng-content>
-    <div class="more" *ngIf="showMoreButtonLink; else lastGap">
-      <ui-btn>Show more</ui-btn>
+<div class="wrapper" >
+  <div class="height-wrapper" [ngStyle]="{height: innerHeight}">
+    <div class="inner" *ngIf="!isPreview; else contentPreview" @showBlock (@showBlock.done)="showEnd($event)">
+      <ng-content></ng-content>
+      <div class="more" *ngIf="showMoreButtonLink; else lastGap">
+        <ui-btn>Show more</ui-btn>
+      </div>
     </div>
-    <ng-template #lastGap>
-      <div class="last-gap"></div>
-    </ng-template>
   </div>
 </div>
+
+<ng-template #contentPreview>
+  <div class="inner" @showBlock>
+    <app-card-placeholder *ngFor="let i of numberOfFitElements | repeat" [type]="title"></app-card-placeholder>
+  </div>
+</ng-template>
+
+<ng-template #lastGap>
+  <div class="last-gap"></div>
+</ng-template>

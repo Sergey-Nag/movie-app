@@ -50,7 +50,7 @@ export class TMDBService {
       coverUrl: poster_path,
       duration: vote_average,
       pg: adult ? '18+' : 'p',
-    })).splice(10);
+    })).splice(0, 10);
   }
 
   private get(path: string): Observable<any> {

@@ -58,7 +58,7 @@
 }
 
 %movie-card {
-  @extend %d-grid, %snap-item;
+  @extend %d-grid;
   grid-template-rows: 1fr 25px 25px;
   gap: 10px;
   height: 100%;

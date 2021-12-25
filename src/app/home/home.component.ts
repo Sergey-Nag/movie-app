@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.isMoviesLoading = false;
       this.cdRef.detectChanges();
-    }, 1200);
+    }, 2000);
 
     this.tmdb.setConfig();
     this.tmdb.getPopular().subscribe((data)=> {

@@ -1,0 +1,43 @@
+@import '/src/styles/shared', '/src/styles/variables', '/src/styles/mixins';
+
+:host {
+  @extend %snap-item;
+
+  &.popular {
+    @extend %movie-card;
+    @include cardHost('movie');
+  }
+  &.category {
+    @include cardHost('category');
+    display: block;
+    position: relative;
+    .preview:not(:first-child) {
+      display: none;
+    }
+  }
+  &.coming-soon {
+    @extend %movie-card;
+    @include cardHost('coming');
+  }
+}
+
+$bg-lighten: rgb(21, 38, 71);
+$bg-darken: rgb(26, 21, 56);
+$bg-deg: 90deg;
+$bg-duration: 2s;
+$bg-gradient: linear-gradient(90deg, $bg-lighten 15%, $bg-darken 45%, $bg-lighten 85%);
+
+
+.preview {
+  @extend %border;
+  height: 100%;
+  background-image: $bg-gradient;
+  background-size: 800% 800%;
+  animation: loadingBg $bg-duration ease-in infinite;
+}
+
+@keyframes loadingBg {
+  0%{background-position:0% 50%}
+  50%{background-position:50% 50%}
+  100%{background-position:100% 50%}
+}

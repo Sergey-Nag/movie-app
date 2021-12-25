@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -9,7 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { AuthorizeComponent } from './authorize/authorize.component';
 import { UserInfoComponent } from './header/user-info/user-info.component';
 import { NavComponent } from './nav/nav.component';
-import { RepeatPipe } from './pipes/repeat.pipe';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';

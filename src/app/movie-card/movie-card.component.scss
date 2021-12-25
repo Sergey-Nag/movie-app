@@ -1,6 +1,7 @@
 @import '/src/styles/shared', '/src/styles/variables';
 
 :host {
+  @extend %snap-item;
 	flex: 1 0 $movie-card-width;
   max-width: $movie-card-width;
   margin-right: $movie-card-margin-right;

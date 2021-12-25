@@ -36,6 +36,24 @@ $category-card-width: $movie-card-width + 40;
 $coming-movie-card-width: $category-card-width + 40;
 $coming-movie-card-title-max-width: $coming-movie-card-width - 130;
 
+$card-size: (
+  movie: (
+    width: $movie-card-width,
+    height: $movie-card-height,
+    margin-right: $movie-card-margin-right
+  ),
+  category: (
+    width: $category-card-width,
+    height: $category-card-height,
+    margin-right: $movie-card-margin-right
+  ),
+  coming: (
+    width: $coming-movie-card-width,
+    height: $movie-card-height,
+    margin-right: $movie-card-margin-right
+  )
+);
+
 $scroll-size: .5em;
 $scroll-color: white;
 // $scroll-color: #192046;

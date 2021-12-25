@@ -1,13 +1,10 @@
-@import '/src/styles/variables', '/src/styles/shared';
+@import '/src/styles/variables', '/src/styles/shared', '/src/styles/mixins';
 
 :host {
   @extend %transition, %snap-item;
   display: block;
   position: relative;
-  margin-right: $movie-card-margin-right;
-	flex: 1 0 $category-card-width;
-  max-width: $category-card-width;
-  height: $category-card-height;
+  @include cardHost('category');
 }
 
 .cover {
