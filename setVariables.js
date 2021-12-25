@@ -14,4 +14,4 @@ variables['production'] = true;
 
 const fileText = `export const environment = ${JSON.stringify(variables)};`
 
-fs.writeFileSync(__dirname + '/src/environments/environments.prod2.ts', fileText, 'utf8');
+fs.writeFileSync('/abc/cba/2/environments/environments.prod.ts', fileText, 'utf8');
