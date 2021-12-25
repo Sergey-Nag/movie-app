@@ -1,4 +1,6 @@
+import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { MovieData } from '../movie-card/movie.type';
 import { CategodyData } from '../movie-category-card/category.type';
 import { MovieComingData } from '../movie-coming-card/movie-coming.interface';
@@ -9,58 +11,13 @@ import { TMDBService } from '../shared/services/tmdb.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  
 })
 export class HomeComponent implements OnInit {
   isMoviesLoading = true;
-  movies: MovieData[] = [
-    {
-      title: 'Luca',
-      coverUrl: 'https://whatsondisneyplus.com/wp-content/uploads/2021/06/ECAFFA0F-5F8D-476A-95BC-F43671D984C8.jpeg',
-      duration: 120,
-      pg: 'p'
-    },
-    {
-      title: 'Lorax',
-      coverUrl: 'https://image.tmdb.org/t/p/original/3rfClKuMmhFawkdCJXMEV3OGOJ3.jpg',
-      duration: 125,
-      pg: 'p'
-    },
-    {
-      title: 'Ron\'s Gone Wrong Ron\'s',
-      coverUrl: 'https://bestdramalist.com/wp-content/uploads/2021/10/ron_s_gone_wrong-719634029-large.jpg',
-      duration: 132,
-      pg: 'p'
-    },
-    {
-      title: 'Luca',
-      coverUrl: 'https://whatsondisneyplus.com/wp-content/uploads/2021/06/ECAFFA0F-5F8D-476A-95BC-F43671D984C8.jpeg',
-      duration: 120,
-      pg: 'p'
-    },
-    {
-      title: 'Lorax',
-      coverUrl: 'https://image.tmdb.org/t/p/original/3rfClKuMmhFawkdCJXMEV3OGOJ3.jpg',
-      duration: 125,
-      pg: 'p'
-    },
-    {
-      title: 'Ron\'s Gone Wrong',
-      coverUrl: 'https://bestdramalist.com/wp-content/uploads/2021/10/ron_s_gone_wrong-719634029-large.jpg',
-      duration: 132,
-      pg: 'p'
-    },
-    {
-      title: 'Black Widow',
-      coverUrl: 'https://i.pinimg.com/originals/63/75/d6/6375d67101c5abdd7c52bcc48f503543.jpg',
-      duration: 129,
-      pg: 'c13'
-    },{
-      title: 'Ron\'s Gone Wrong',
-      coverUrl: 'https://bestdramalist.com/wp-content/uploads/2021/10/ron_s_gone_wrong-719634029-large.jpg',
-      duration: 132,
-      pg: 'p'
-    },
-  ];
+
+  movies: MovieData[] = [];
+
   comingMovies: MovieComingData[] = [
     {
       title: 'Luca',

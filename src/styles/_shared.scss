@@ -59,11 +59,9 @@
 
 %movie-card {
   @extend %d-grid, %snap-item;
-	flex: 1 0 $movie-card-width;
-  max-width: $movie-card-width;
   grid-template-rows: 1fr 25px 25px;
   gap: 10px;
-  height: $movie-card-height;
+  height: 100%;
 }
 
 %scroll {

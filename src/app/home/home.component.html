@@ -1,4 +1,4 @@
-<app-row-wrapp [title]="'popular'" [showMoreButtonLink]="'test'">
+<app-row-wrapp [title]="'popular'" [showMoreButtonLink]="'test'" [isPreview]="isMoviesLoading">
   <app-movie-card *ngFor="let movie of movies" [movie]="movie" [isPreview]="isMoviesLoading"></app-movie-card>
 </app-row-wrapp>
 <app-row-wrapp [title]="'category'">

@@ -1,8 +1,14 @@
 @import '/src/styles/shared', '/src/styles/variables';
 
 :host {
-  @extend %movie-card, %transition;
+	flex: 1 0 $movie-card-width;
+  max-width: $movie-card-width;
   margin-right: $movie-card-margin-right;
+  height: $movie-card-height;
+}
+
+.card-grid-container {
+  @extend %movie-card;
 }
 
 .cover {

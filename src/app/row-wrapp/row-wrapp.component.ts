@@ -1,9 +1,10 @@
-import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, ChangeDetectionStrategy, Input, AfterViewInit, ElementRef, OnDestroy, ChangeDetectorRef, ContentChild, TemplateRef } from '@angular/core';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { Component, ChangeDetectionStrategy, Input, AfterViewInit, ElementRef, OnDestroy, ChangeDetectorRef, ContentChild, TemplateRef, ContentChildren, ViewChildren, AfterContentInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
+import { MovieCardComponent } from '../movie-card/movie-card.component';
+import { CardBaseComponent } from '../shared/components/CardBase.component';
 import { ResizeInfo, ResizeService } from '../shared/services/resize.service';
-import { CardBase } from '../shared/theme/Card.base';
 
 @Component({
   selector: 'app-row-wrapp',
@@ -11,40 +12,46 @@ import { CardBase } from '../shared/theme/Card.base';
   styleUrls: ['./row-wrapp.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger('cardShow', [
-      transition('void => *', [
-        style({
-          opacity: 0,
-        }),
-        animate(200, style({
-          opacity: 1,
-        }))
-      ]),
-      transition('* => void', [
-        style({
-          opacity: 1,
-        }),
-        animate(200, style({
-          opacity: 0,
-        }))
-      ]),
+    trigger('listAnimation', [
+      transition('* => *', [
+        query(':leave', [
+          stagger(100, [
+            animate('0.5s', style({ opacity: 0 }))
+          ])
+        ], { optional: true }),
+        query(':enter', [
+          style({ opacity: 0 }),
+          stagger(100, [
+            animate('0.5s', style({ opacity: 1 }))
+          ])
+        ], { optional: true }),
+      ])
     ])
   ]
 })
-export class RowWrappComponent implements AfterViewInit, OnDestroy {
+export class RowWrappComponent implements AfterViewInit, AfterContentInit, OnDestroy {
   @Input() title: string;
   @Input() showMoreButtonLink: string;
+  @Input() isPreview = false;
+  @Input() data: any[];
 
   resizeSubsribtion$: Subscription;
   numberOfFitElements = 0;
+
+  @ContentChild('elRef') childrens: any;
 
   constructor(
     private resize: ResizeService,
     private cdRef: ChangeDetectorRef,
     private elementRef: ElementRef
   ) { }
+
+  ngAfterContentInit(): void {
+    console.log(this.childrens);
+  }
   
   ngAfterViewInit(): void {
+    
     this.resizeSubsribtion$ = this.resize.getResize(this.elementRef)
       .pipe(
         map(({width}: ResizeInfo) => this.countElements(width)),

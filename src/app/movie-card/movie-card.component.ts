@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { TMDBService } from '../shared/services/tmdb.service';
 import { TMDBPosterSize } from '../shared/services/tmdb.types';
-import { CardBase } from '../shared/theme/Card.base';
+import { CardBaseComponent } from '../shared/components/CardBase.component';
 import { MovieData } from './movie.type';
 
 @Component({
@@ -10,7 +10,7 @@ import { MovieData } from './movie.type';
   styleUrls: ['./movie-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovieCardComponent extends CardBase implements OnInit {
+export class MovieCardComponent extends CardBaseComponent implements OnInit {
   @Input() movie: MovieData = null;
 
   get coverUrl() {
