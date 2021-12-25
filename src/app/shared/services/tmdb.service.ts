@@ -15,6 +15,8 @@ export class TMDBService {
   config: TMDBConfig;
   private apiUrl = 'https://api.themoviedb.org/3';
 
+  popular: MovieData[];
+
   constructor(private http: HttpClient) {
   }
 
@@ -23,9 +25,7 @@ export class TMDBService {
       .subscribe((config: TMDBConfig) => this.config = config);
   }
 
-  getPopular() {
-    console.log(this.config);
-    
+  getPopular(): Observable<any> {    
     return this.get('/discover/movie')
       .pipe(map((data: any) => {
         return {

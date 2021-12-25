@@ -33,7 +33,7 @@ import { ResizeInfo, ResizeService } from '../shared/services/resize.service';
     trigger('showBlock', [
       transition(':enter', [
         style({
-          marginTop: '-100%'
+          opacity: 0,
         }),
         animate('0.3s 300ms', style({
           opacity: 1,
@@ -106,7 +106,7 @@ export class RowWrappComponent implements AfterViewInit, AfterViewChecked, OnDes
   }
 
   private countElements(width: number): number {
-    const cardW = this.cardWidth ? this.cardWidth + 20 : 250 + 20;
+    const cardW = this.cardWidth ? (this.cardWidth + 20 ): (250 + 20);
     return Math.floor(width / cardW);
   }
 
