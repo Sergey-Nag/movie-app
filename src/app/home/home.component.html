@@ -1,9 +1,0 @@
-<app-row-wrapp [title]="'popular'" [showMoreButtonLink]="'test'" [isPreview]="!movies.length">
-  <app-movie-card *ngFor="let movie of movies" [movie]="movie"></app-movie-card>
-</app-row-wrapp>
-<app-row-wrapp [title]="'category'" [isPreview]="!comingMovies.length">
-  <app-movie-category-card *ngFor="let category of categories" [category]="category"></app-movie-category-card>
-</app-row-wrapp>
-<app-row-wrapp [title]="'Coming Soon'" [isPreview]="!categories.length">
-  <app-coming-movie-card *ngFor="let comingMovie of comingMovies" [movie]="comingMovie"></app-coming-movie-card>
-</app-row-wrapp>
