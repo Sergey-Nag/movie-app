@@ -1,7 +1,4 @@
-import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { delay, finalize } from 'rxjs/operators';
 import { MovieData } from '../movie-card/movie.type';
 import { CategodyData } from '../movie-category-card/category.type';
 import { MovieComingData } from '../movie-coming-card/movie-coming.interface';
