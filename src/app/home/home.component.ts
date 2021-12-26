@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { MovieData } from '../movie-card/movie.type';
 import { CategodyData } from '../movie-category-card/category.type';
 import { MovieComingData } from '../movie-coming-card/movie-coming.interface';
-import { TMDBService } from '../shared/services/tmdb.service';
+import { TMDBService } from '../core/services/tmdb.service';
 
 @Component({
   selector: 'app-home',

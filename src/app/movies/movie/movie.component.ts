@@ -1,4 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { BackgroundImageService } from 'src/app/core/services/background-image.service';
+import { TMDBService } from 'src/app/core/services/tmdb.service';
+import { MovieDetails, TMDBPosterSize } from 'src/app/core/types/tmdb.types';
 
 @Component({
   selector: 'app-movie',
@@ -6,11 +12,27 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./movie.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MovieComponent implements OnInit {
+export class MovieComponent implements OnInit, OnDestroy {
+  private paramsSubsribtion$: Subscription;
+  movie: MovieDetails;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private tmdb: TMDBService, private bgImage: BackgroundImageService) { }
 
   ngOnInit(): void {
+    this.paramsSubsribtion$ = this.route.params
+      .pipe(switchMap(({id}: any) => {
+        return this.tmdb.getMovie(id);
+      }))
+      .subscribe((data) => {
+        this.movie = data;
+        this.bgImage.setImage(
+          this.tmdb.getBackdropPath(this.movie.backdrop_path, TMDBPosterSize.original));
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.bgImage.removeImage();
+    this.paramsSubsribtion$.unsubscribe();
   }
 
 }

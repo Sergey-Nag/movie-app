@@ -17,6 +17,7 @@ import { MovieComingCardComponent } from './movie-coming-card/movie-coming-card.
 import { HomeComponent } from './home/home.component';
 import { RowWrappComponent } from './row-wrapp/row-wrapp.component';
 import { CardPlaceholderComponent } from './row-wrapp/card-placeholder/card-placeholder.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { CardPlaceholderComponent } from './row-wrapp/card-placeholder/card-plac
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    CoreModule,
     AppRoutingModule,
     SharedModule,
   ],

@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "variables": "node setVariables",
+    "deploy": "ng build --prod --base-href \"https://sergey-nag.github.io/movie-app/\" & ngh --dir dist/movies-app",
     "test": "ng test"
   },
   "private": true,

@@ -19,14 +19,26 @@ a {
 
 body {
   background-color: var(--theme-body-bg);
-  
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
   &.theme-0 {
     --theme: 0
   }
   &.theme-1 {
     --theme: 1
   }
+
+  &.image-blur {
+    background-color: var(--theme-body-bg-alpha);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(15px);
+  }
 }
+
 
 .container {
   @extend %container;
