@@ -1,12 +1,61 @@
-<header class="section-header">
+<div class="movie-content" *ngIf="movie">
+  <header class="section-cover">
+    
+  </header>
+  
+  <section class="section-info">
+    <h1 class="title">{{movie.title}}</h1>
+    <p class="info">
+      <span class="year">{{movie.release_date | date:'YYYY'}}</span><span class="dot-divider"></span>
+      <span class="categories">{{movie.genres | map:'name' | join:', '}}</span><span class="dot-divider"></span>
+      <span class="duration"><svg-icon src="assets/icons/Clock_18x18.svg" class="ui-icon white"></svg-icon> {{movie.runtime}} minute</span>
+    </p>
+    <p class="votes">
+      <app-movie-rating [points]="movie.vote_average" [votes]="movie.vote_count"></app-movie-rating>
+    </p>
+    <hr>
+    <app-movie-cast [id]="movie.id"></app-movie-cast>
+  </section>
 
-</header>
-
-<section class="section-info">
-  <h2 class="title"></h2>
-  <p class="info"></p>
-  <span class="votes"></span>
-  <p class="description"></p>
-</section>
-
-<section class="cast"></section>
+  <section class="section-details">
+    <p class="description">{{movie.overview}}</p>
+    <ui-btn width="full" [style]="'gradient'" class="watch-btn">Watch</ui-btn>
+    <hr>
+    <table class="table">
+      <tr class="table-row" *ngIf="movie.homepage">
+        <td>Movie homepage:</td>
+        <td><a target="_blank" href="{{movie.homepage}}">{{movie.homepage}}</a></td>
+      </tr>
+      <tr class="table-row">
+        <td>Popularity:</td>
+        <td>{{movie.popularity}}</td>
+      </tr>
+      <tr class="table-row">
+        <td>Status:</td>
+        <td>{{movie.status}}</td>
+      </tr>
+      <tr class="table-row">
+        <td>Released:</td>
+        <td>{{movie.release_date | date}}</td>
+      </tr>
+      <tr class="table-row">
+        <td>Budget:</td>
+        <td>{{movie.budget | currency}}</td>
+      </tr>
+      <tr class="table-row">
+        <td>Revenue:</td>
+        <td>{{movie.revenue | currency}}</td>
+      </tr>
+      <tr class="table-row">
+        <td>Country:</td>
+        <td>{{movie.production_countries | map:'name' | join:', '}}</td>
+      </tr>
+      <tr class="table-row">
+        <td>Original Lang:</td>
+        <td>{{movie.spoken_languages | map:'english_name' | join:', '}}</td>
+      </tr>
+    </table>
+  </section>
+  
+  
+</div>

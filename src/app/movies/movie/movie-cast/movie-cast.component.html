@@ -1,0 +1,18 @@
+<h3>Cast ({{cast && cast.length}})</h3>
+
+<br>
+
+<app-movie-list-collapsed>
+  <div class="cast-member" *ngFor="let member of cast">
+    <img *ngIf="member.profile_path; else photoPlaceholder" [src]="getPhoto(member)" [alt]="member.character" class="photo">
+    <div class="info">
+      <p class="name">{{member.name}}</p>
+      <p class="character">{{member.character}}</p>
+      <p class="job">{{member.known_for_department}}</p>
+    </div>
+  </div>
+</app-movie-list-collapsed>
+
+<ng-template #photoPlaceholder>
+  <div class="photo"></div>
+</ng-template>

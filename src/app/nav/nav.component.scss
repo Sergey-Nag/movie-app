@@ -8,7 +8,6 @@
   @extend %d-flex, %flex-col;
   justify-content: space-between;
   background-color: var(--theme-body-bg-alpha-2);
-  box-shadow: 0 0 20px var(--theme-body-bg-alpha);
   border-radius: $base-radius;
   padding: {
     top: $base-padding;

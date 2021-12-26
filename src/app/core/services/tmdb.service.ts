@@ -5,7 +5,7 @@ import { map } from "rxjs/operators";
 import { MovieData } from "src/app/movie-card/movie.type";
 import { MovieComingData } from "src/app/movie-coming-card/movie-coming.interface";
 import { environment } from "src/environments/environment";
-import { GenreResponse, MovieDetails, TMDBConfig, TMDBPosterSize } from "../types/tmdb.types";
+import { CastDetails, GenreResponse, MovieDetails, TMDBConfig, TMDBPosterSize } from "../types/tmdb.types";
 
 
 @Injectable({
@@ -41,11 +41,12 @@ export class TMDBService {
   }
 
   getImagePath(path: string, size: TMDBPosterSize = TMDBPosterSize.w342): string {
+    if (!path) return '';
     return `${this.config.images.secure_base_url}${this.config.images.poster_sizes[size]}${path}`;
   }
 
   getBackdropPath(path: string, size: TMDBPosterSize = TMDBPosterSize.w342): string {
-    return `${this.config.images.base_url}${this.config.images.poster_sizes[size]}${path}`;
+    return `${this.config.images.secure_base_url}${this.config.images.poster_sizes[size]}${path}`;
   }
 
   getGenres(): Observable<GenreResponse[]> {
@@ -62,6 +63,10 @@ export class TMDBService {
 
   getMovie(id: number): Observable<MovieDetails> {
     return this.get(`/movie/${id}`);
+  }
+
+  getMovieCredits(id: number): Observable<CastDetails> {
+    return this.get(`/movie/${id}/credits`);
   }
 
   private formatResultsToMovieData(results: any[]): MovieData[] {

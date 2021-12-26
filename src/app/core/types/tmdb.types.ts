@@ -42,7 +42,7 @@ export type MovieDetails = {
     id: number,
     name: string,
     poster_path: string
-  }[],
+  }[] | null,
   budget: number,
   genres: {
     id: number,
@@ -80,4 +80,29 @@ export type MovieDetails = {
   video: boolean,
   vote_average: number,
   vote_count: number,
+}
+
+export type CastMember = {
+  adult: boolean,
+  cast_id: number,
+  id: number,
+  character: string,
+  gender: number | null,
+  known_for_department: string,
+  name: string,
+  original_name: string,
+  popularity: number,
+  profile_path: string | null,
+  credit_id: string,
+  order: number,
+}
+
+export type CrewMember = CastMember & {
+  job: string,
+}
+
+export type CastDetails = {
+  id: number,
+  cast: CastMember[],
+  crew: CrewMember[],
 }

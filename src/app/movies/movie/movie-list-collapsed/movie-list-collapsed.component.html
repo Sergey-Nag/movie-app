@@ -1,0 +1,8 @@
+<div
+  class="wrapper"
+  [class.collapsed]="collapsed">
+  <ng-content></ng-content>
+</div>
+<div class="btn-wrapp">
+  <ui-btn [style]="'transparent'" (click)="collapsed = !collapsed">Show {{collapsed ? 'more' : 'less'}}</ui-btn>
+</div>

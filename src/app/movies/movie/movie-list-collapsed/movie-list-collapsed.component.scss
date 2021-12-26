@@ -1,0 +1,28 @@
+@import '/src/styles/shared';
+
+.wrapper {
+  @extend %d-grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: .6em;
+  row-gap: 1.2em;
+  padding-top: 11px;
+
+  &.collapsed {
+    @extend %d-flex, %scroll;
+    padding-top: 0;
+    align-items: stretch;
+    height: 100px;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+
+  }
+}
+
+.btn-wrapp {
+  text-align: center;
+}
+
+::ng-deep .wrapper.collapsed > * {
+  @extend %snap-item;
+  flex: 0 0 auto;
+}

@@ -1,0 +1,37 @@
+@import '/src/styles/shared', '/src/styles/variables';
+
+$photo-size: 70px;
+
+.cast-member {
+  @extend %d-flex;
+  align-items: center;
+
+  .photo {
+    width: $photo-size;
+    height: $photo-size;
+    min-height: $photo-size;
+    min-width: $photo-size;
+    border-radius: 50%;
+  }
+  
+  img.photo {
+    object-fit: cover;
+  }
+
+  div.photo {
+    background: url('/assets/icons/No-picture-white-20.svg') no-repeat center, var(--theme-body-bg-alpha-2);
+  }
+
+  .info {
+    margin-left: 1em;
+  }
+
+  .name {
+    font-weight: 500;
+  }
+  .job {
+    margin-top: .9em;
+    font-size: .8em;
+    opacity: $opacity-secondary;
+  }
+}

@@ -1,0 +1,14 @@
+@import '/src/styles/variables';
+
+:host {
+  display: inline-block;
+}
+
+.star {
+  margin-right: .5em;
+}
+
+.total {
+  margin-left: .4em;
+  opacity: $opacity-secondary;
+}
