@@ -21,6 +21,9 @@
   // --theme: 
   // asdasdasd
   --theme-body-bg: #140c28;
+
+  --theme-body-bg-alpha: rgba(16, 11, 40, 0.8);
+  --theme-body-bg-alpha-2: rgba(16, 11, 40, 0.55);
 }
 
 @media (prefers-color-scheme: dark) {

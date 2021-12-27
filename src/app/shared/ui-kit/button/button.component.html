@@ -2,6 +2,7 @@
   *ngIf="linkTo"
   class="ui-item btn"
   [class.transparent]="style === 'transparent'"
+  [class.gradient]="style === 'gradient'"
   [class.btn-size-lg]="size === 'lg'"
   [routerLink]="linkTo"
   routerLinkActive="active"
@@ -13,6 +14,7 @@
   *ngIf="!linkTo"
   class="ui-item btn"
   [class.transparent]="style === 'transparent'"
+  [class.gradient]="style === 'gradient'"
   [class.btn-size-lg]="size === 'lg'"
   >
   <ui-icon *ngIf="icon" [name]="icon" [iconStyle]="active ? 'fill' : 'outline'"></ui-icon>

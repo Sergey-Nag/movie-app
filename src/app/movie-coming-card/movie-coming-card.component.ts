@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { TMDBService } from '../shared/services/tmdb.service';
-import { TMDBPosterSize } from '../shared/services/tmdb.types';
+import { TMDBService } from '../core/services/tmdb.service';
+import { TMDBPosterSize } from '../core/types/tmdb.types';
 import { MovieComingData } from './movie-coming.interface';
 
 @Component({

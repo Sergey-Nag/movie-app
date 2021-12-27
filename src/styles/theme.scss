@@ -19,6 +19,7 @@
     &.fill {
       path, circle {
         fill: var(--light);
+        stroke: none;
       }
     }
   }

@@ -34,11 +34,11 @@
 
 .more {
   @extend %d-flex, %flex-content-center;
-  padding: 0 $body-columns-gap - $movie-card-margin-right;
-	flex: 1 0 200px;
+  padding: 0 $body-padding - $movie-card-margin-right;
+	flex: 1 0 170px;
   max-width: $movie-card-width;
 }
 
 .last-gap {
-  flex: 1 0 $body-columns-gap - $movie-card-margin-right;
+  flex: 1 0 $body-padding - $movie-card-margin-right;
 }

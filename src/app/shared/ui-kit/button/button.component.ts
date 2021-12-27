@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input } from "@angular/core";
 
 
 @Component({
@@ -10,10 +10,15 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 export class ButtonComponent {
   @Input() linkTo: string[] = null;
   @Input() size: string = null;
-  @Input() style: string = null;
+  @Input() style: 'transparent' | 'gradient' | 'fill' = null;
   @Input() icon: string;
+  @Input() width: 'full' | null = null;
+
   active: boolean = false;
 
+  @HostBinding('class.full') get containerWidth() {
+    return this.width === 'full';
+  }
   constructor() {}
 
 }

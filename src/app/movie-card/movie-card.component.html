@@ -6,7 +6,9 @@
 
 <ng-template #cardContent>
   <div class="card-grid-container" @showBlock>
-    <img [src]="coverUrl" class="cover" [alt]="movie.title">
+    <a [routerLink]="['../movies', movie.id]">
+      <img [src]="coverUrl" class="cover" [alt]="movie.title">
+    </a>
     <div class="title-row">
       <div class="title-wrapp">
         <h3 class="title">{{movie.title}}</h3>

@@ -5,7 +5,7 @@ import { map } from "rxjs/operators";
 import { MovieData } from "src/app/movie-card/movie.type";
 import { MovieComingData } from "src/app/movie-coming-card/movie-coming.interface";
 import { environment } from "src/environments/environment";
-import { GenreResponse, TMDBConfig, TMDBPosterSize } from "./tmdb.types";
+import { CastDetails, GenreResponse, MovieDetails, MovieImages, TMDBConfig, TMDBPosterSize } from "../types/tmdb.types";
 
 
 @Injectable({
@@ -21,6 +21,10 @@ export class TMDBService {
   constructor(private http: HttpClient) {
   }
 
+  getConfig() {
+    return this.http.get(`${this.apiUrl}/configuration?api_key=${this.apiKey}`).pipe(map((config: TMDBConfig) => this.config = config));
+  }
+
   setConfig() {
     this.http.get(`${this.apiUrl}/configuration?api_key=${this.apiKey}`)
       .subscribe((config: TMDBConfig) => this.config = config);
@@ -33,16 +37,16 @@ export class TMDBService {
           ...data,
           results: this.formatResultsToMovieData(data.results)
         }
-      }))
+      }));
   }
 
-  getImage(path: string, size: TMDBPosterSize = TMDBPosterSize.original) {
-    const { images } = this.config;
-    return this.http.get(
-      images.base_url +
-      images.poster_sizes[size] +
-      path
-    )
+  getImagePath(path: string, size: TMDBPosterSize = TMDBPosterSize.w342): string {
+    if (!path) return '';
+    return `${this.config.images.secure_base_url}${this.config.images.poster_sizes[size]}${path}`;
+  }
+
+  getBackdropPath(path: string, size: TMDBPosterSize = TMDBPosterSize.w342): string {
+    return `${this.config.images.secure_base_url}${this.config.images.poster_sizes[size]}${path}`;
   }
 
   getGenres(): Observable<GenreResponse[]> {
@@ -57,8 +61,22 @@ export class TMDBService {
       })));
   }
 
+  getMovie(id: number): Observable<MovieDetails> {
+    return this.get(`/movie/${id}`);
+  }
+
+  getMovieCredits(id: number): Observable<CastDetails> {
+    return this.get(`/movie/${id}/credits`);
+  }
+
+  getMovieImages(id: number): Observable<MovieImages> {
+    return this.get(`/movie/${id}/images`);
+  }
+
   private formatResultsToMovieData(results: any[]): MovieData[] {
-    return results.map(({original_title, poster_path, vote_average, adult}: any) => ({
+    return results.map(({id, genre_ids, original_title, poster_path, vote_average, adult}: any) => ({
+      id,
+      gengres: genre_ids,
       title: original_title,
       coverUrl: poster_path,
       duration: vote_average,

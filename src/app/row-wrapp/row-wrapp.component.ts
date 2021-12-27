@@ -1,7 +1,5 @@
 import {
   animate,
-  query,
-  stagger,
   style,
   transition,
   trigger,
@@ -15,14 +13,11 @@ import {
   ElementRef,
   OnDestroy,
   ChangeDetectorRef,
-  ContentChildren,
-  Renderer2,
   AfterViewChecked
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
-import { MovieCardComponent } from '../movie-card/movie-card.component';
-import { ResizeInfo, ResizeService } from '../shared/services/resize.service';
+import { ResizeInfo, ResizeService } from '../core/services/resize.service';
 
 @Component({
   selector: 'app-row-wrapp',

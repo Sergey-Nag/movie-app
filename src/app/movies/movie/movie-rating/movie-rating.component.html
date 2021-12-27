@@ -1,0 +1,5 @@
+<span class="stars">
+  <svg-icon *ngFor="let starPath of stars" src="{{ starPath }}" class="ui-icon fill white star"></svg-icon> 
+</span>
+<span class="points">{{ points }} / 10</span>
+<span class="total" title="Total votes">({{ votes }})</span>
