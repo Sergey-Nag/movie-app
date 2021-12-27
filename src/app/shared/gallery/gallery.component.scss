@@ -1,0 +1,56 @@
+@import '/src/styles/shared', '/src/styles/variables';
+
+:host {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1000;
+}
+
+.backdrop {
+  @extend %d-grid;
+  padding: $body-padding;
+  grid-template-areas: 
+    "cover cover cover"
+    ". gallery .";
+  grid-template-columns: 1fr calc(min(90em, 100vw) - #{$body-padding * 2}) 1fr;
+  grid-template-rows: calc(85vh - #{$body-padding + $movie-sections-gap}) calc(15vh - #{$body-padding});
+  row-gap: $movie-sections-gap;
+  justify-items: center;
+  width: inherit;
+  height: inherit;
+  background-color: rgba(0, 0, 0, .6);
+}
+
+.cover {
+  &-wrapp {
+    @extend %d-flex, %flex-content-center;
+    grid-area: cover;
+  }
+  @extend %transition;
+  display: block;
+  border-radius: $image-cover-radius;
+  max-width: 100%;
+  max-height: 100%;
+
+  &-min {
+    @extend %cover-min;
+    opacity: 1;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}
+
+.gallery {
+  @extend %gallery-wrapp;
+  grid-area: gallery;
+  max-width: none;
+  margin: 0;
+
+  &-scroll {
+    @extend %galery-scroll;
+  }
+}

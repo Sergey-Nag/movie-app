@@ -31,23 +31,32 @@ export class MovieMediaComponent implements OnInit, AfterViewInit, OnDestroy {
     
     const index = +element.dataset.index;
     this.activatedImageIndex = index;
+    this.cover.nativeElement.style.willChange = 'background';
+
+    element.scrollIntoView({
+      block: 'nearest', behavior: 'smooth', inline: 'center'
+    });
     this.cdRef.detectChanges();
+    setTimeout(() => {
+      this.cover.nativeElement.style.willChange = 'unset';
+    }, 200);
   }
 
   ngOnInit(): void {
     this.tmdb.getMovieImages(this.id)
       .pipe(
         map((data) => {
+          console.log(data);
+
           return [
             ...data.backdrops.map(el=> el.file_path),
-            ...data.posters.map(el=> el.file_path)
             ]
         })
       )
       .subscribe((data) => {
         this.images = data;
         this.activatedImageIndex = 0;
-
+        
         this.cdRef.detectChanges();
       })
   }

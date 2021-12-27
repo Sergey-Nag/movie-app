@@ -1,7 +1,11 @@
 <div
   #cover
+  appGallery
+  [appGallery.images]="images"
+  [appGallery.selectedIndex]="activatedImageIndex"
   class="cover"
-  [style.background]="images && 'url('+ getImagePath(activatedImageIndex) +') no-repeat center / cover'">
+  [style.background]="images && 'url('+ getImagePath(activatedImageIndex) +') no-repeat top center / cover'"
+  [class.cover-show]="galleryShow">
 
   <div class="gallery gallery-wrapper" [class.gallery-show]="galleryShow">
     <div class="gallery-scroll" (click)="chooseImage($event)">

@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $base-padding: 1em;
 $body-padding: $base-padding * 3;
 
@@ -60,3 +62,7 @@ $scroll-size: .5em;
 $scroll-color: white;
 // $scroll-color: #192046;
 
+$movie-sections-gap: math.div($body-columns-gap, 2);
+
+$image-cover-radius: $base-radius * 2;
+$images-gap: math.div($body-padding, 2);
