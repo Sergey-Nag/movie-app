@@ -9,7 +9,6 @@ import { TMDBService } from '../core/services/tmdb.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  
 })
 export class HomeComponent implements OnInit {
   movies: MovieData[] = [];
