@@ -13,11 +13,14 @@
     <p class="votes">
       <app-movie-rating [points]="movie.vote_average" [votes]="movie.vote_count"></app-movie-rating>
     </p>
-    <hr>
+    <hr class="main-block-divider">
     <app-movie-cast [id]="movie.id"></app-movie-cast>
   </section>
 
   <section class="section-details">
+    <div class="logo">
+      <img *ngFor="let logo of logos" [src]="getImageUrl(logo.file_path)" class="logo-img" alt="">
+    </div>
     <p class="description">{{movie.overview}}</p>
     <ui-btn width="full" [style]="'gradient'" class="watch-btn">Watch</ui-btn>
     <hr>

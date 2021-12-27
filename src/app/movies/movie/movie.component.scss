@@ -96,3 +96,18 @@ section {
     }
   }
 }
+
+.logo {
+  text-align: center;
+
+  &-img {
+    max-width: 100%;
+  }
+}
+
+hr {
+  opacity: .2;
+  &.main-block-divider {
+    margin: $movie-sections-gap 0;
+  }
+}

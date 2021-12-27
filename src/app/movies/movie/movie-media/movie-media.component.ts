@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { combineLatest, concat, fromEvent, merge, Observable, Subscription } from 'rxjs';
-import { combineAll, debounce, debounceTime, delay, filter, map, mapTo, repeat, sample, skipUntil, takeLast, takeUntil, takeWhile } from 'rxjs/operators';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, ViewChild, ElementRef, AfterViewInit, OnDestroy, Output } from '@angular/core';
+import { fromEvent, merge, Subscription } from 'rxjs';
+import { debounceTime, filter, map, mapTo } from 'rxjs/operators';
 import { TMDBService } from 'src/app/core/services/tmdb.service';
 import { TMDBPosterSize } from 'src/app/core/types/tmdb.types';
 
@@ -12,7 +12,7 @@ import { TMDBPosterSize } from 'src/app/core/types/tmdb.types';
 })
 export class MovieMediaComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() id: number;
-  
+
   images: string[];
   activatedImageIndex: number = null;
   galleryShow = false;

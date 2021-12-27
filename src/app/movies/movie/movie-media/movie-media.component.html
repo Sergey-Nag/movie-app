@@ -1,9 +1,9 @@
 <div
   #cover
   appGallery
+  class="cover"
   [appGallery.images]="images"
   [appGallery.selectedIndex]="activatedImageIndex"
-  class="cover"
   [style.background]="images && 'url('+ getImagePath(activatedImageIndex) +') no-repeat top center / cover'"
   [class.cover-show]="galleryShow">
 
@@ -14,8 +14,7 @@
         [src]="getImagePath(i)"
         class="cover-min"
         [class.active]="i === activatedImageIndex"
-        [attr.data-index]="i"
-        >
+        [attr.data-index]="i">
     </div>
   </div>
 </div>
