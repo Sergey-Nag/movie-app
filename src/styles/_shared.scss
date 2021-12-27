@@ -40,8 +40,16 @@
   border-radius: $bttn-radius;
 }
 
+%transition-tripple {
+  transition: all $transition-time * 3 ease-out;
+}
+
 %transition {
   transition: all $transition-time $transition-func;
+}
+
+%transition-double {
+  transition: all $transition-time * 2 ease-in-out;
 }
 
 %theme-defaults {

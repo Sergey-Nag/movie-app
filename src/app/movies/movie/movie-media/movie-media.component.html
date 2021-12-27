@@ -1,0 +1,17 @@
+<div
+  #cover
+  class="cover"
+  [style.background]="images && 'url('+ getImagePath(activatedImageIndex) +') no-repeat center / cover'">
+
+  <div class="gallery gallery-wrapper" [class.gallery-show]="galleryShow">
+    <div class="gallery-scroll" (click)="chooseImage($event)">
+      <img
+        *ngFor="let img of images; let i = index"
+        [src]="getImagePath(i)"
+        class="cover-min"
+        [class.active]="i === activatedImageIndex"
+        [attr.data-index]="i"
+        >
+    </div>
+  </div>
+</div>

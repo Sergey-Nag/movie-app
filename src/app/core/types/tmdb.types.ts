@@ -1,3 +1,5 @@
+import { type } from "os"
+
 export type TMDBResult = {
   adult: boolean,
   backdrop_path: string,
@@ -105,4 +107,21 @@ export type CastDetails = {
   id: number,
   cast: CastMember[],
   crew: CrewMember[],
+}
+
+export type TMDBImage = {
+  aspect_ratio: number,
+  file_path: string,
+  height: number,
+  width: number,
+  iso_639_1: string,
+  vote_average: number,
+  vote_count: number
+}
+
+export type MovieImages = {
+  id: number,
+  backdrops: TMDBImage[],
+  logos: TMDBImage[],
+  posters: TMDBImage[],
 }

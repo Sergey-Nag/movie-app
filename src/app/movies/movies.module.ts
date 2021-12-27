@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MovieRatingComponent } from './movie/movie-rating/movie-rating.component';
 import { MovieCastComponent } from './movie/movie-cast/movie-cast.component';
 import { MovieListCollapsedComponent } from './movie/movie-list-collapsed/movie-list-collapsed.component';
+import { MovieMediaComponent } from './movie/movie-media/movie-media.component';
 
 
 
@@ -16,7 +17,8 @@ import { MovieListCollapsedComponent } from './movie/movie-list-collapsed/movie-
     MovieComponent,
     MovieRatingComponent,
     MovieCastComponent,
-    MovieListCollapsedComponent
+    MovieListCollapsedComponent,
+    MovieMediaComponent
   ],
   imports: [
     CommonModule,

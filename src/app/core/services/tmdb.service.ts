@@ -5,7 +5,7 @@ import { map } from "rxjs/operators";
 import { MovieData } from "src/app/movie-card/movie.type";
 import { MovieComingData } from "src/app/movie-coming-card/movie-coming.interface";
 import { environment } from "src/environments/environment";
-import { CastDetails, GenreResponse, MovieDetails, TMDBConfig, TMDBPosterSize } from "../types/tmdb.types";
+import { CastDetails, GenreResponse, MovieDetails, MovieImages, TMDBConfig, TMDBPosterSize } from "../types/tmdb.types";
 
 
 @Injectable({
@@ -67,6 +67,10 @@ export class TMDBService {
 
   getMovieCredits(id: number): Observable<CastDetails> {
     return this.get(`/movie/${id}/credits`);
+  }
+
+  getMovieImages(id: number): Observable<MovieImages> {
+    return this.get(`/movie/${id}/images`);
   }
 
   private formatResultsToMovieData(results: any[]): MovieData[] {
