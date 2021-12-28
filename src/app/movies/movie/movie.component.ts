@@ -1,10 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef, Sanitizer } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { from, Observable, of, Subscription } from 'rxjs';
 import { find, map, switchMap } from 'rxjs/operators';
 import { BackgroundImageService } from 'src/app/core/services/background-image.service';
 import { TMDBService } from 'src/app/core/services/tmdb.service';
-import { MovieDetails, MovieImages, TMDBImage, TMDBPosterSize } from 'src/app/core/types/tmdb.types';
+import { MovieDetails, MovieImages, MovieVideo, MovieVideos, TMDBImage, TMDBPosterSize } from 'src/app/core/types/tmdb.types';
+import { getYoutubeLink } from 'src/app/helpers/youtube';
 
 @Component({
   selector: 'app-movie',
@@ -18,12 +20,14 @@ export class MovieComponent implements OnInit, OnDestroy {
   movie: MovieDetails;
   movieLoaded = false;
   logos: TMDBImage[];
+  trailerLink: SafeResourceUrl;
 
   constructor(
     private route: ActivatedRoute,
     private tmdb: TMDBService,
     private bgImage: BackgroundImageService,
-    private cdRef: ChangeDetectorRef) { }
+    private cdRef: ChangeDetectorRef,
+    private sanitizer: DomSanitizer) { }
 
   getImageUrl(path: string) {
     return this.tmdb.getImagePath(path);
@@ -43,9 +47,17 @@ export class MovieComponent implements OnInit, OnDestroy {
         }),
         switchMap((data: any) => {
           this.logos = [data.logo];
-          console.log(data.logos);
-          
           return of(data.id)
+        }),
+        switchMap((id: number) => {
+          return this.tmdb.getMovieVideos(id);
+        }),
+        switchMap((videos: MovieVideos) => {
+          const trailer = videos.results.find((vid: MovieVideo) => vid.type === 'Trailer' && vid.iso_639_1 === 'en');
+          if (trailer) {
+            this.trailerLink = this.sanitizer.bypassSecurityTrustResourceUrl(getYoutubeLink(trailer.key));
+          }
+          return of(videos.id);
         }),
         switchMap((id: number) => {
           return this.tmdb.getMovie(id);
@@ -53,8 +65,7 @@ export class MovieComponent implements OnInit, OnDestroy {
       )
       .subscribe((data) => {
         this.movie = data;
-        console.log(data);
-  
+        
         this.cdRef.detectChanges();
         this.bgImage.setImage(
           this.tmdb.getBackdropPath(this.movie.backdrop_path, TMDBPosterSize.original)
