@@ -1,0 +1,15 @@
+<div class="backdrop" [@backdrop]="backdropState" (@backdrop.done)="onBackdropEnd($event)" (click)="closeGallery($event.target)">
+  <div class="cover-wrapp" @fade *ngIf="images">
+    <img class="cover" [src]="imageUrl">
+  </div>
+  <div class="gallery" #scroll>
+    <div class="gallery-scroll" (click)="chooseImage($event.target)">
+      <img
+        *ngFor="let img of images; let i = index"
+        [src]="getImagePath(i)"
+        class="cover-min"
+        [class.active]="i === activeImageIndex"
+        [attr.data-index]="i">
+    </div>
+  </div>
+</div>

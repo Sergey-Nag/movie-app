@@ -9,6 +9,9 @@
     "deploy": "ng build --prod --base-href \"https://sergey-nag.github.io/movie-app/\" & ngh --dir dist/movies-app",
     "g:pipe": "ng generate pipe --skip-tests",
     "g:component": "ng generate component -c OnPush --skip-tests",
+    "g:module": "ng generate module",
+    "g:service": "ng generate service --skip-tests",
+    "g:directive": "ng generate directive --skip-tests",
     "test": "ng test"
   },
   "private": true,

@@ -125,3 +125,23 @@ export type MovieImages = {
   logos: TMDBImage[],
   posters: TMDBImage[],
 }
+
+export type VideoType = 'Teaser' | 'Featurette' | 'Clip' | 'Trailer' | 'Bloopers' | 'Behind the Scenes';
+
+export type MovieVideo = {
+  id: string,
+  iso_639_1: string,
+  iso_3166_1: string,
+  key: string,
+  name: string,
+  official: boolean,
+  published_at: string,
+  site: string,
+  size: number,
+  type: VideoType,
+}
+
+export type MovieVideos = {
+  id: number,
+  results: MovieVideo[]
+}

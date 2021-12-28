@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { combineLatest, concat, fromEvent, merge, Observable, Subscription } from 'rxjs';
-import { combineAll, debounce, debounceTime, delay, filter, map, mapTo, repeat, sample, skipUntil, takeLast, takeUntil, takeWhile } from 'rxjs/operators';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, ViewChild, ElementRef, AfterViewInit, OnDestroy, Output } from '@angular/core';
+import { fromEvent, merge, Subscription } from 'rxjs';
+import { debounceTime, filter, map, mapTo } from 'rxjs/operators';
 import { TMDBService } from 'src/app/core/services/tmdb.service';
 import { TMDBPosterSize } from 'src/app/core/types/tmdb.types';
 
@@ -12,7 +12,7 @@ import { TMDBPosterSize } from 'src/app/core/types/tmdb.types';
 })
 export class MovieMediaComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() id: number;
-  
+
   images: string[];
   activatedImageIndex: number = null;
   galleryShow = false;
@@ -31,23 +31,32 @@ export class MovieMediaComponent implements OnInit, AfterViewInit, OnDestroy {
     
     const index = +element.dataset.index;
     this.activatedImageIndex = index;
+    this.cover.nativeElement.style.willChange = 'background';
+
+    element.scrollIntoView({
+      block: 'nearest', behavior: 'smooth', inline: 'center'
+    });
     this.cdRef.detectChanges();
+    setTimeout(() => {
+      this.cover.nativeElement.style.willChange = 'unset';
+    }, 200);
   }
 
   ngOnInit(): void {
     this.tmdb.getMovieImages(this.id)
       .pipe(
         map((data) => {
+          console.log(data);
+
           return [
             ...data.backdrops.map(el=> el.file_path),
-            ...data.posters.map(el=> el.file_path)
             ]
         })
       )
       .subscribe((data) => {
         this.images = data;
         this.activatedImageIndex = 0;
-
+        
         this.cdRef.detectChanges();
       })
   }

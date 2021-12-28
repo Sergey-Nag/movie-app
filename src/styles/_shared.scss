@@ -77,6 +77,8 @@
     height: $scroll-size;
     width: $scroll-size;
   }
+
+  padding-right: -$scroll-size;
   
   &::-webkit-scrollbar-track {
     background: transparent;
@@ -113,4 +115,44 @@
   grid-area: content;
 
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 20px, rgba(0, 0, 0, 1.0) 60px);
+}
+
+%gallery-wrapp {
+  max-width: 80%;
+  min-width: 20%;
+  height: 120px;
+  overflow: hidden;
+  margin: {
+    right: $images-gap;
+    bottom: $images-gap;
+  }
+  border-radius: $image-cover-radius;
+}
+
+%galery-scroll {
+  @extend %d-flex;
+  height: inherit;
+  flex-wrap: nowrap;
+}
+
+%cover-min {
+  @extend %transition;
+  cursor: pointer;
+  flex: 0 0 auto;
+  width: calc(80% / 5);
+  height: inherit;
+  object-fit: cover;
+  margin-right: $images-gap;
+  border-radius: $image-cover-radius;
+  opacity: .5;
+
+  &:hover,
+  &:focus {
+    opacity: .8;
+  }
+
+  &.active {
+    opacity: .9;
+    border: 2px solid var(--light);
+  }
 }

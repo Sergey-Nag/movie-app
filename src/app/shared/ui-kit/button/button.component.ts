@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from "@angular/core";
 
 
 @Component({

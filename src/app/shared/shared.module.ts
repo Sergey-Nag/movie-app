@@ -4,6 +4,7 @@ import { RepeatPipe } from "./pipes/repeat.pipe";
 import { SliceArrayPipe } from "./pipes/slice.pipe";
 import { UiKitModule } from "./ui-kit/ui-kit.module";
 import { JoinPipe } from './pipes/join.pipe';
+import { GalleryModule } from "./gallery/gallery.module";
 
 @NgModule({
   declarations: [
@@ -14,9 +15,11 @@ import { JoinPipe } from './pipes/join.pipe';
   ],
   imports: [
     UiKitModule,
+    GalleryModule,
   ],
   exports: [
     UiKitModule,
+    GalleryModule,
     RepeatPipe,
     SliceArrayPipe,
     MapPipe,

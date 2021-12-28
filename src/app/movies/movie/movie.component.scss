@@ -1,7 +1,4 @@
-@use "sass:math";
 @import '/src/styles/variables', '/src/styles/shared';
-
-$sections-gap: math.div($body-columns-gap, 2);
 
 :host {
   @extend%content-view;
@@ -15,7 +12,7 @@ $sections-gap: math.div($body-columns-gap, 2);
     "info info details"
     "cast cast details";
   grid-template-rows: 600px auto;
-  gap: $sections-gap;
+  gap: $movie-sections-gap;
   grid-template-columns: repeat(2, 1fr) min(460px, max(30%, 300px));
   padding-right: $body-padding;
   color: var(--theme-color-text);
@@ -97,5 +94,20 @@ section {
       text-overflow: ellipsis;
 
     }
+  }
+}
+
+.logo {
+  text-align: center;
+
+  &-img {
+    max-width: 100%;
+  }
+}
+
+hr {
+  opacity: .2;
+  &.main-block-divider {
+    margin: $movie-sections-gap 0;
   }
 }
