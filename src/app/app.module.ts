@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { RowWrappComponent } from './row-wrapp/row-wrapp.component';
 import { CardPlaceholderComponent } from './row-wrapp/card-placeholder/card-placeholder.component';
 import { CoreModule } from './core/core.module';
+import { FirebaseModule } from './firebase/firebase.module';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     AppRoutingModule,
     SharedModule,
+    FirebaseModule,
   ],
   bootstrap: [AppComponent]
 })

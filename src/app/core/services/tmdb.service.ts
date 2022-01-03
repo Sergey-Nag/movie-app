@@ -50,7 +50,7 @@ export class TMDBService {
   }
 
   getGenres(): Observable<GenreResponse[]> {
-    return this.get('/genre/movie/list');
+    return this.get('/genre/movie/list').pipe(map((resp: any) => resp.genres));
   }
 
   getUpcoming(): Observable<GenreResponse[]> {
@@ -63,6 +63,13 @@ export class TMDBService {
 
   getMovie(movie_id: number): Observable<MovieDetails> {
     return this.get(`/movie/${movie_id}`);
+  }
+
+  getDiscoverMovieBy(query: {[key: string]: string | number}): Observable<any> {
+    const queryParams = Object.keys(query).map((key) => {
+      return `${key}=${query[key]}`;
+    }).join('&');
+    return this.get(`/discover/movie`, queryParams);
   }
 
   getMovieCredits(movie_id: number): Observable<CastDetails> {
@@ -95,7 +102,7 @@ export class TMDBService {
     }))
   }
 
-  private get(path: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}${path}?api_key=${this.apiKey}`)
+  private get(path: string, params?: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}${path}?api_key=${this.apiKey}${params ? `&${params}` : ''}`)
   }
 }

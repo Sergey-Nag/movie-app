@@ -8,6 +8,8 @@ import { MovieRatingComponent } from './movie/movie-rating/movie-rating.componen
 import { MovieCastComponent } from './movie/movie-cast/movie-cast.component';
 import { MovieListCollapsedComponent } from './movie/movie-list-collapsed/movie-list-collapsed.component';
 import { MovieMediaComponent } from './movie/movie-media/movie-media.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CategoryComponent } from './categories/category/category.component';
 
 
 
@@ -18,7 +20,9 @@ import { MovieMediaComponent } from './movie/movie-media/movie-media.component';
     MovieRatingComponent,
     MovieCastComponent,
     MovieListCollapsedComponent,
-    MovieMediaComponent
+    MovieMediaComponent,
+    CategoriesComponent,
+    CategoryComponent
   ],
   imports: [
     CommonModule,

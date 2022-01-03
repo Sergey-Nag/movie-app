@@ -106,6 +106,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "movies-app:build:production",
+            "firebaseProject": "moviedb-cebb6",
+            "firebaseHostingSite": "moviedb-cebb6"
+          }
         }
       }
     }

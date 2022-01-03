@@ -3,6 +3,8 @@ import { MovieData } from '../movie-card/movie.type';
 import { CategodyData } from '../movie-category-card/category.type';
 import { MovieComingData } from '../movie-coming-card/movie-coming.interface';
 import { TMDBService } from '../core/services/tmdb.service';
+import { map, switchMap } from 'rxjs/operators';
+import { GenreResponse, MovieDetails } from '../core/types/tmdb.types';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,6 @@ export class HomeComponent implements OnInit {
   constructor(private cdRef: ChangeDetectorRef, private tmdb: TMDBService) { }
   
   ngOnInit(): void {
-    this.tmdb.setConfig();
     this.tmdb.getPopular()
       .subscribe((data)=> {
         this.movies = data.results;
@@ -26,10 +27,10 @@ export class HomeComponent implements OnInit {
       });
 
     this.tmdb.getGenres()
-      .subscribe(({genres}: any)=> {
-        this.categories = genres.map((genre) => ({title: genre.name, coverUrl: 'https://telekritika.ua/tk-static/2019/04/surprise_marvel_releases_a_new_full_trailer_and_poster_for_avengers_endgame_social.0.jpg'}))
+      .subscribe((genres)=> {
+        this.categories = genres.map((genre) => ({id: genre.id, title: genre.name, coverUrl: 'https://telekritika.ua/tk-static/2019/04/surprise_marvel_releases_a_new_full_trailer_and_poster_for_avengers_endgame_social.0.jpg'}))
         this.cdRef.detectChanges();
-      })
+      });
 
     this.tmdb.getUpcoming()
       .subscribe(({results}: any) => {

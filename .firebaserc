@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "moviedb-cebb6": {
+      "hosting": {
+        "movies-app": [
+          "moviedb-cebb6"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "moviedb-cebb6"
+  }
+}
