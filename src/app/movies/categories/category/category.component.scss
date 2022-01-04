@@ -1,0 +1,23 @@
+@import '/src/styles/shared', '/src/styles/variables';
+
+.movies-wrapp {
+  @extend %d-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-left: $row-left-gap;
+  
+  &::after {
+    content: '';
+    flex: auto;
+  }
+}
+
+.title {
+  font-size: 2em;
+  color: var(--light);
+  padding-left: $row-left-gap;
+}
+
+.title, app-movie-card {
+  margin-bottom: $base-padding;
+}

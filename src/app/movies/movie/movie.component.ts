@@ -66,9 +66,9 @@ export class MovieComponent implements OnInit, OnDestroy {
         this.movie = data;
         
         this.cdRef.detectChanges();
-        this.bgImage.setImage(
-          this.tmdb.getBackdropPath(this.movie.backdrop_path, TMDBPosterSize.original)
-          );
+        this.tmdb.getBackdropPath(this.movie.backdrop_path, TMDBPosterSize.w500).subscribe((path) => {
+          this.bgImage.setImage(path);
+        })
       });
 
   }

@@ -1,5 +1,5 @@
 export type CategodyData = {
-  title: string;
+  name: string;
   coverUrl: string;
   id: number;
 }

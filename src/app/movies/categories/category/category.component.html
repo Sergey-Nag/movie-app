@@ -1,1 +1,4 @@
-<router-outlet></router-outlet>
+<h1 class="title">{{categoryName}}</h1>
+<div class="movies-wrapp" *ngIf="!!movies.length">
+  <app-movie-card *ngFor="let movie of movies" [movie]="movie"></app-movie-card>
+</div>

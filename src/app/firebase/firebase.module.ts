@@ -9,14 +9,18 @@ import { provideStorage } from '@angular/fire/storage';
 import { getAuth } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
 import { getStorage } from 'firebase/storage';
+import { FirestoreModule, getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 @NgModule({
   imports: [
     CommonModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
-    provideStorage(() => getStorage()),
+    AngularFireModule.initializeApp(environment.firebase),
   ],
+  exports: [
+    AngularFireModule,
+  ]
 })
 export class FirebaseModule { }

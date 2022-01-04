@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { MovieData } from "src/app/movie-card/movie.type";
-import { MovieComingData } from "src/app/movie-coming-card/movie-coming.interface";
+import { Observable, of } from "rxjs";
+import { map, mapTo, switchMap, take } from "rxjs/operators";
+import { MovieData } from "src/app/shared/components/movie-card/movie.type";
+import { MovieComingData } from "src/app/shared/components/movie-coming-card/movie-coming.interface";
 import { environment } from "src/environments/environment";
 import { CastDetails, GenreResponse, MovieDetails, MovieImages, MovieVideos, TMDBConfig, TMDBPosterSize } from "../types/tmdb.types";
 
@@ -42,11 +42,20 @@ export class TMDBService {
 
   getImagePath(path: string, size: TMDBPosterSize = TMDBPosterSize.w342): string {
     if (!path) return '';
+    if (path[0] !== '/') path = `/${path}`;
+
     return `${this.config.images.secure_base_url}${this.config.images.poster_sizes[size]}${path}`;
   }
 
-  getBackdropPath(path: string, size: TMDBPosterSize = TMDBPosterSize.w342): string {
-    return `${this.config.images.secure_base_url}${this.config.images.poster_sizes[size]}${path}`;
+  getBackdropPath(path: string, size: TMDBPosterSize = TMDBPosterSize.w342): Observable<string> {
+    if (this.config) {
+      return of(`${this.config.images.secure_base_url}${this.config.images.poster_sizes[size]}${path}`).pipe(take(1));
+    }
+
+    return this.getConfig().pipe(
+      switchMap(() => of(`${this.config.images.secure_base_url}${this.config.images.poster_sizes[size]}${path}`)),
+      take(1),
+      )
   }
 
   getGenres(): Observable<GenreResponse[]> {
@@ -69,7 +78,12 @@ export class TMDBService {
     const queryParams = Object.keys(query).map((key) => {
       return `${key}=${query[key]}`;
     }).join('&');
-    return this.get(`/discover/movie`, queryParams);
+    return this.get(`/discover/movie`, queryParams).pipe(map((data) => {
+      return {
+        ...data,
+        results: this.formatResultsToMovieData(data.results)
+      }
+    }));
   }
 
   getMovieCredits(movie_id: number): Observable<CastDetails> {
@@ -85,10 +99,10 @@ export class TMDBService {
   }
 
   private formatResultsToMovieData(results: any[]): MovieData[] {
-    return results.map(({id, genre_ids, original_title, poster_path, vote_average, adult}: any) => ({
+    return results.map(({id, genre_ids, title, poster_path, vote_average, adult}: any) => ({
       id,
       gengres: genre_ids,
-      title: original_title,
+      title: title,
       coverUrl: poster_path,
       duration: vote_average,
       pg: adult ? '18+' : 'p',
