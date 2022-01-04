@@ -11,13 +11,11 @@ import { NavComponent } from './nav/nav.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { MovieCardComponent } from './movie-card/movie-card.component';
-import { MovieCategoryCardComponent } from './movie-category-card/movie-category-card.component';
-import { MovieComingCardComponent } from './movie-coming-card/movie-coming-card.component';
 import { HomeComponent } from './home/home.component';
 import { RowWrappComponent } from './row-wrapp/row-wrapp.component';
 import { CardPlaceholderComponent } from './row-wrapp/card-placeholder/card-placeholder.component';
 import { CoreModule } from './core/core.module';
+import { FirebaseModule } from './firebase/firebase.module';
 
 @NgModule({
   declarations: [
@@ -27,9 +25,6 @@ import { CoreModule } from './core/core.module';
     AuthorizeComponent,
     UserInfoComponent,
     NavComponent,
-    MovieCardComponent,
-    MovieCategoryCardComponent,
-    MovieComingCardComponent,
     RowWrappComponent,
     CardPlaceholderComponent,
   ],
@@ -41,6 +36,7 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     AppRoutingModule,
     SharedModule,
+    FirebaseModule
   ],
   bootstrap: [AppComponent]
 })

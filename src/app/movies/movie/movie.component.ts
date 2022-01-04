@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef, Sanitizer } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
-import { from, Observable, of, Subscription } from 'rxjs';
-import { find, map, switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { of, Subscription } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { BackgroundImageService } from 'src/app/core/services/background-image.service';
 import { TMDBService } from 'src/app/core/services/tmdb.service';
 import { MovieDetails, MovieImages, MovieVideo, MovieVideos, TMDBImage, TMDBPosterSize } from 'src/app/core/types/tmdb.types';
@@ -16,7 +16,6 @@ import { getYoutubeLink } from 'src/app/helpers/youtube';
 })
 export class MovieComponent implements OnInit, OnDestroy {
   private paramsSubsribtion: Subscription;
-  private logosSubscribtion: Subscription;
   movie: MovieDetails;
   movieLoaded = false;
   logos: TMDBImage[];
@@ -67,9 +66,9 @@ export class MovieComponent implements OnInit, OnDestroy {
         this.movie = data;
         
         this.cdRef.detectChanges();
-        this.bgImage.setImage(
-          this.tmdb.getBackdropPath(this.movie.backdrop_path, TMDBPosterSize.original)
-          );
+        this.tmdb.getBackdropPath(this.movie.backdrop_path, TMDBPosterSize.w500).subscribe((path) => {
+          this.bgImage.setImage(path);
+        })
       });
 
   }

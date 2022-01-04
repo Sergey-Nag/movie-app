@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { TMDBService } from '../core/services/tmdb.service';
-import { TMDBPosterSize } from '../core/types/tmdb.types';
-import { CardBaseComponent } from '../shared/components/CardBase.component';
+import { TMDBService } from '../../../core/services/tmdb.service';
+import { TMDBPosterSize } from '../../../core/types/tmdb.types';
+import { CardBaseComponent } from '../CardBase.component';
 import { MovieData } from './movie.type';
 
 @Component({

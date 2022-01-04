@@ -121,6 +121,7 @@
   max-width: 80%;
   min-width: 20%;
   height: 120px;
+  z-index: 100;
   overflow: hidden;
   margin: {
     right: $images-gap;
@@ -144,15 +145,8 @@
   object-fit: cover;
   margin-right: $images-gap;
   border-radius: $image-cover-radius;
-  opacity: .5;
-
-  &:hover,
-  &:focus {
-    opacity: .8;
-  }
 
   &.active {
-    opacity: .9;
     border: 2px solid var(--light);
   }
 }

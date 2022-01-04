@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { MovieData } from '../movie-card/movie.type';
-import { CategodyData } from '../movie-category-card/category.type';
-import { MovieComingData } from '../movie-coming-card/movie-coming.interface';
+import { MovieData } from '../shared/components/movie-card/movie.type';
+import { CategodyData } from '../shared/components/movie-category-card/category.type';
+import { MovieComingData } from '../shared/components/movie-coming-card/movie-coming.interface';
 import { TMDBService } from '../core/services/tmdb.service';
+import { concatAll, concatMap, map, mergeAll, switchMap } from 'rxjs/operators';
+import { GenreResponse, MovieDetails } from '../core/types/tmdb.types';
+import { DatabaseService } from '../firebase/database.service';
+import { combineLatest, concat, merge } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -15,21 +19,28 @@ export class HomeComponent implements OnInit {
   comingMovies: MovieComingData[] = []
   categories: CategodyData[] = [];
 
-  constructor(private cdRef: ChangeDetectorRef, private tmdb: TMDBService) { }
+  constructor(private cdRef: ChangeDetectorRef, private tmdb: TMDBService, private db: DatabaseService) { }
   
   ngOnInit(): void {
-    this.tmdb.setConfig();
     this.tmdb.getPopular()
       .subscribe((data)=> {
         this.movies = data.results;
         this.cdRef.detectChanges();
       });
 
-    this.tmdb.getGenres()
-      .subscribe(({genres}: any)=> {
-        this.categories = genres.map((genre) => ({title: genre.name, coverUrl: 'https://telekritika.ua/tk-static/2019/04/surprise_marvel_releases_a_new_full_trailer_and_poster_for_avengers_endgame_social.0.jpg'}))
-        this.cdRef.detectChanges();
-      })
+      combineLatest([this.tmdb.getGenres(), this.db.getCategoryBackdrop()])
+        .pipe(map(([genres, backdrops]: [GenreResponse[], any]) => {
+          return genres.map((genre) => ({
+            ...genre,
+            coverUrl: backdrops[genre.id] ? this.tmdb.getImagePath(backdrops[genre.id]) : ''
+          }))
+        }))
+        .subscribe((data: CategodyData[])=> {
+          console.log(data);
+          
+          this.categories = data;
+          this.cdRef.detectChanges();
+      });
 
     this.tmdb.getUpcoming()
       .subscribe(({results}: any) => {

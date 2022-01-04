@@ -1,4 +1,4 @@
-@import '/src/styles/shared', '/src/styles/variables', '/src/app/movie-card/movie-card.component.scss';
+@import '/src/styles/shared', '/src/styles/variables', '../movie-card/movie-card.component.scss';
 
 :host {
   @extend %movie-card, %transition;

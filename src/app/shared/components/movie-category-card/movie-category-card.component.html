@@ -1,0 +1,7 @@
+<!-- ToDo: Create category page -->
+
+<a [routerLink]="['../movies', 'categories', category.id]">
+  <div class="cover" [ngStyle]="{'background-image': backgroundUrl}">
+    <h3 class="title">{{category.name}}</h3>
+  </div>
+</a>

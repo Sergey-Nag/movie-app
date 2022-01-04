@@ -1,7 +1,7 @@
 <app-gallery></app-gallery>
 <div class="bg-wrapp">
   <app-header></app-header>
-  <app-nav></app-nav>
+  <app-nav [ngClass]="bgImageSrc ? 'transparent' : ''"></app-nav>
   <router-outlet class="view"></router-outlet>
 </div>
 <img *ngIf="bgImageSrc" (load)="bgLoaded = true" [src]="bgImageSrc" class="bg-image" [style.opacity]="bgLoaded ? '1': '0'" @fade>

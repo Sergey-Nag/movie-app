@@ -1,8 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { BackgroundImageService } from './core/services/background-image.service';
+import { TMDBService } from './core/services/tmdb.service';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +22,10 @@ export class AppComponent implements OnInit {
   constructor(
     private cdRef: ChangeDetectorRef,
     private bgImage: BackgroundImageService,
-  ) {}
+    private tmdb: TMDBService,
+  ) {
+    this.tmdb.getConfig();
+  }
 
   _bgUrl:string = null;
   get bgImageSrc() {
@@ -43,5 +45,4 @@ export class AppComponent implements OnInit {
       this.cdRef.detectChanges();
     });
   }
-
 }

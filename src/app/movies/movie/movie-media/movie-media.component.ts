@@ -46,8 +46,6 @@ export class MovieMediaComponent implements OnInit, AfterViewInit, OnDestroy {
     this.tmdb.getMovieImages(this.id)
       .pipe(
         map((data) => {
-          console.log(data);
-
           return [
             ...data.backdrops.map(el=> el.file_path),
             ]
