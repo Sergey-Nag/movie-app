@@ -1,14 +1,16 @@
 @import '/src/styles/shared', '/src/styles/variables';
 
-.movies-wrapp {
-  @extend %d-flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding-left: $row-left-gap;
-  
-  &::after {
-    content: '';
-    flex: auto;
+.movies {
+  &-wrapp {
+    @extend %d-grid;
+    grid-template-columns: repeat(auto-fit, minmax($movie-card-width + 20, 1fr));
+    padding-left: $row-left-gap;
+    row-gap: $movie-sections-gap;
+    justify-content: space-between;
+  }
+
+  &-pagination {
+    padding: $movie-sections-gap 0;
   }
 }
 
@@ -16,8 +18,9 @@
   font-size: 2em;
   color: var(--light);
   padding-left: $row-left-gap;
+  margin-bottom: $base-padding;
 }
 
-.title, app-movie-card {
-  margin-bottom: $base-padding;
+app-movie-card {
+  margin: 0;
 }

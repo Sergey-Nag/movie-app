@@ -3,7 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collection, collectionData, Firestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subscription } from 'rxjs';
+import { combineLatest, of, Subscription } from 'rxjs';
 import { combineAll, concatAll, filter, map, mapTo, pairwise, switchMap, take } from 'rxjs/operators';
 import { BackgroundImageService } from 'src/app/core/services/background-image.service';
 import { TMDBService } from 'src/app/core/services/tmdb.service';
@@ -23,6 +23,9 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   movies: MovieData[] = [];
   categoryName = '';
+  
+  currentPage = 1;
+  totalPages = 1;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,15 +51,18 @@ export class CategoryComponent implements OnInit, OnDestroy {
       .subscribe((backdropSrc) => {
         this.bgImage.setImage(backdropSrc);
       });
-    
-    this.moviesSub = this.route.params
+
+    this.moviesSub = combineLatest([this.route.params, this.route.queryParams])
       .pipe(
-        switchMap(({id}: any) => this.tmdb.getDiscoverMovieBy({
+        switchMap(([{id}, {page}]: any) => this.tmdb.getDiscoverMovieBy({
           with_genres: id,
+          page: page ?? 1,
         }))
       ).subscribe((data) => {
         this.movies = data.results;
-        console.log(this.movies);
+        console.log(data);
+        this.currentPage = data.page;
+        this.totalPages = data.total_pages;
         
         this.cdRef.detectChanges();
       });

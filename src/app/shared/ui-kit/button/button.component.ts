@@ -13,7 +13,8 @@ export class ButtonComponent {
   @Input() style: 'transparent' | 'gradient' | 'fill' = null;
   @Input() icon: string;
   @Input() width: 'full' | null = null;
-
+  @Input() form: 'square' | 'auto' = 'auto';
+  @Input() queryParams: any = null;
   active: boolean = false;
 
   @HostBinding('class.full') get containerWidth() {

@@ -1,21 +1,24 @@
 <a
-  *ngIf="linkTo"
+  *ngIf="linkTo || queryParams"
   class="ui-item btn"
   [class.transparent]="style === 'transparent'"
   [class.gradient]="style === 'gradient'"
   [class.btn-size-lg]="size === 'lg'"
+  [class.btn-square]="form === 'square'"
   [routerLink]="linkTo"
+  [queryParams]="queryParams"
   routerLinkActive="active"
   #link="routerLinkActive">
   <ui-icon *ngIf="icon" [name]="icon" [iconStyle]="link.isActive ? 'fill': 'outline'"></ui-icon>
   <ng-container *ngTemplateOutlet="btnContent"></ng-container>
 </a>
 <button
-  *ngIf="!linkTo"
+  *ngIf="!linkTo && !queryParams"
   class="ui-item btn"
   [class.transparent]="style === 'transparent'"
   [class.gradient]="style === 'gradient'"
   [class.btn-size-lg]="size === 'lg'"
+  [class.btn-square]="form === 'square'"
   >
   <ui-icon *ngIf="icon" [name]="icon" [iconStyle]="active ? 'fill' : 'outline'"></ui-icon>
   <ng-container *ngTemplateOutlet="btnContent"></ng-container>

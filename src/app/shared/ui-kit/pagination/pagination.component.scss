@@ -1,0 +1,36 @@
+@import '/src/styles/shared';
+
+.pagination {
+  &-wrapp {
+    @extend %d-flex;
+    justify-content: center;
+  }
+}
+
+.button {
+  &-next {
+    margin-left: $base-padding;
+  }
+  &-prev {
+    margin-right: $base-padding;
+  }
+}
+
+.buttons {
+  
+  &-first {
+    @extend .button-prev;
+  }
+  &-last {
+    @extend .button-next;
+  }
+
+}
+
+ui-btn {
+  margin: 0 $base-padding / 3;
+}
+
+::ng-deep ui-btn.active .btn{
+  background: rgb(92, 114, 236);
+}
