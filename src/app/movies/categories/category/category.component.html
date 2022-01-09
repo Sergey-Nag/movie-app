@@ -1,6 +1,8 @@
 <h1 class="title">{{categoryName}}</h1>
-<div class="movies-wrapp" *ngIf="!!movies.length">
-  <app-movie-card *ngFor="let movie of movies" [movie]="movie"></app-movie-card>
+<div class="movies-wrapp-height">
+  <div class="movies-wrapp" *ngIf="!!movies.length">
+    <app-movie-card *ngFor="let movie of movies" [movie]="movie"></app-movie-card>
+  </div>
 </div>
 <div class="movies-pagination">
   <ui-pagination [linksToQuery]="'page'" [totalPages]="totalPages" [activePage]="currentPage"></ui-pagination>

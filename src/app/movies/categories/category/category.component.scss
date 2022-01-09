@@ -7,6 +7,10 @@
     padding-left: $row-left-gap;
     row-gap: $movie-sections-gap;
     justify-content: space-between;
+  
+    &-height {
+      min-height: calc(82vh - (#{$header-height} + #{$body-padding} + #{$content-view-padding-top}));
+    }
   }
 
   &-pagination {
