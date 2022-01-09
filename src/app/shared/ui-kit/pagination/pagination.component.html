@@ -3,9 +3,9 @@
     <ui-btn form="square" (click)="goToPrevPage()"><</ui-btn>
   </div>
   <div class="buttons">
-    <ui-btn *ngIf="hasMorePagesPrev" class="buttons-first" [queryParams]="{page: 1}">1</ui-btn>
+    <ui-btn *ngIf="hasMorePagesPrev" class="buttons-first" [queryParams]="{page: 1}">1...</ui-btn>
     <ui-btn form="square" *ngFor="let page of pages" [class.active]="page === activePage" [queryParams]="{page: page}">{{page}}</ui-btn>
-    <ui-btn *ngIf="hasMorePagesNext" class="buttons-last" [queryParams]="{page: totalPages}">{{totalPages}}</ui-btn>
+    <ui-btn *ngIf="hasMorePagesNext" class="buttons-last" [queryParams]="{page: totalPages}">...{{totalPages}}</ui-btn>
   </div>
   <div class="button-next">
     <ui-btn form="square" (click)="goToNextPage()">></ui-btn>

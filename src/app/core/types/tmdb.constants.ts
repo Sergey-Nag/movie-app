@@ -1,0 +1,1 @@
+export const TMDB_CATEGORY_MAX_PAGE = 500;
