@@ -1,11 +1,12 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { map, mapTo, switchMap, take } from "rxjs/operators";
+import { map, switchMap, take } from "rxjs/operators";
 import { MovieData } from "src/app/shared/components/movie-card/movie.type";
-import { MovieComingData } from "src/app/shared/components/movie-coming-card/movie-coming.interface";
 import { environment } from "src/environments/environment";
+import { TMDB_API_URL } from "../constants/tmdb.constants";
 import { CastDetails, GenreResponse, MovieDetails, MovieImages, MovieVideos, TMDBConfig, TMDBPosterSize } from "../types/tmdb.types";
+import { TMDBDataFormatter } from "./tmdb/TMDBDataFormatter";
 
 
 @Injectable({
@@ -13,10 +14,10 @@ import { CastDetails, GenreResponse, MovieDetails, MovieImages, MovieVideos, TMD
 })
 export class TMDBService {
   private apiKey: string = environment.tmdbApiKEy;
-  config: TMDBConfig;
-  private apiUrl = 'https://api.themoviedb.org/3';
-
+  private apiUrl = TMDB_API_URL;
+  private formatter = new TMDBDataFormatter();
   popular: MovieData[];
+  config: TMDBConfig;
 
   constructor(private http: HttpClient) {
   }
@@ -35,7 +36,7 @@ export class TMDBService {
       .pipe(map((data: any) => {
         return {
           ...data,
-          results: this.formatResultsToMovieData(data.results)
+          results: this.formatter.formatResultsToMovieData(data.results)
         }
       }));
   }
@@ -66,7 +67,7 @@ export class TMDBService {
     return this.get('/movie/upcoming')
       .pipe(map((data: any) => ({
         ...data,
-        results: this.formatResultsToComingMovieData(data.results)
+        results: this.formatter.formatResultsToComingMovieData(data.results)
       })));
   }
 
@@ -81,7 +82,7 @@ export class TMDBService {
     return this.get(`/discover/movie`, queryParams).pipe(map((data) => {
       return {
         ...data,
-        results: this.formatResultsToMovieData(data.results)
+        results: this.formatter.formatResultsToMovieData(data.results)
       }
     }));
   }
@@ -96,24 +97,6 @@ export class TMDBService {
 
   getMovieVideos(movie_id: number): Observable<MovieVideos> {
     return this.get(`/movie/${movie_id}/videos`);
-  }
-
-  private formatResultsToMovieData(results: any[]): MovieData[] {
-    return results.map(({id, genre_ids, title, poster_path, vote_average, adult}: any) => ({
-      id,
-      gengres: genre_ids,
-      title: title,
-      coverUrl: poster_path,
-      duration: vote_average,
-      pg: adult ? '18+' : 'p',
-    }));
-  }
-
-  private formatResultsToComingMovieData(results: any[]): MovieComingData[] {
-    return this.formatResultsToMovieData(results).map((el, i) => ({
-      ...el,
-      comingDate: results[i].release_date
-    }))
   }
 
   private get(path: string, params?: string): Observable<any> {
